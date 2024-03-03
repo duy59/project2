@@ -10,5 +10,3 @@ TemplateProcessor.prototype.fillIn = function (dictionary) {
   });
   return filledTemplate;
 };
-
-module.exports = TemplateProcessor;

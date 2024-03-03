@@ -1,21 +1,19 @@
-"use strict";
-
-function MakeMultiFilter(originalArray) {
-  let currentArray = originalArray.slice();
+function makeMultiFilter(originalArray) {
+  let currentArray = originalArray.slice(); 
 
   function arrayFilterer(filterCriteria, callback) {
-    if (typeof filterCriteria === "function") {
-      currentArray = currentArray.filter(filterCriteria);
-      if (typeof callback === "function") {
-        callback.apply(originalArray, [currentArray]);
+      if (typeof filterCriteria !== 'function') {
+          return currentArray;
       }
-      return arrayFilterer;
-    } else {
-      return currentArray;
-    }
+
+      currentArray = currentArray.filter(filterCriteria);
+
+      if (typeof callback === 'function') {
+          callback.call(originalArray, currentArray);
+      }
+      
+      return arrayFilterer; 
   }
 
   return arrayFilterer;
 }
-
-module.exports = MakeMultiFilter;
